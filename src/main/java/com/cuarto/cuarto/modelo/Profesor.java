@@ -1,67 +1,26 @@
 package com.cuarto.cuarto.modelo;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Profesor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-       private Long id_profesor;
+    @Column(name="id_profesor")
+    private Long idProfesor;
     private String nombre;
+    @Column(name="apellido_p")
     private String apellidoP;
+    @Column(name="apellido_m")
     private String apellidoM;
     private String matricula;
+    @OneToMany(mappedBy="profesor",cascade=CascadeType.ALL)
 
-    public Profesor(Long id_profesor, String nombre, String apellidoP, String apellidoM, String matricula) {
-        this.id_profesor = id_profesor;
-        this.nombre = nombre;
-        this.apellidoP = apellidoP;
-        this.apellidoM = apellidoM;
-        this.matricula = matricula;
-    }
+    private List<Asignatura> asignaturas=new ArrayList<>();
 
-    public Long getId_profesor() {
-        return id_profesor;
-    }
-
-    public void setId_profesor(Long id_profesor) {
-        this.id_profesor = id_profesor;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellidoP() {
-        return apellidoP;
-    }
-
-    public void setApellidoP(String apellidoP) {
-        this.apellidoP = apellidoP;
-    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public String getApellidoM() {
-        return apellidoM;
-    }
-
-    public void setApellidoM(String apellidoM) {
-        this.apellidoM = apellidoM;
-    }
 }
