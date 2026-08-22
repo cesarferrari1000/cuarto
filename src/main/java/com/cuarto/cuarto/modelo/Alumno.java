@@ -25,6 +25,9 @@ public class Alumno {
         this.apellidoM = apellidoM;
         this.matricula = matricula;
     }
+    public Alumno(){
+
+    }
 
     public Long getId() {
         return id;
