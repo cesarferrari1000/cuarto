@@ -11,9 +11,9 @@ public class Alumno {
     private Long id;
     @Column
     private String nombre;
-    @Column(name="apellidoP")
+    @Column(name="apellido_p")
     private String apellidoP;
-    @Column(name="apellidoM")
+    @Column(name="apellido_m")
     private String apellidoM;
     @Column(name="matricula")
     private String matricula;
@@ -25,9 +25,7 @@ public class Alumno {
         this.apellidoM = apellidoM;
         this.matricula = matricula;
     }
-    public Alumno(){
-
-    }
+    public Alumno(){}
 
     public Long getId() {
         return id;
