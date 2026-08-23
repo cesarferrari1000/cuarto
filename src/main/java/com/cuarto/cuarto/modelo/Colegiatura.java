@@ -17,4 +17,55 @@ public class Colegiatura {
     @ManyToOne
     @JoinColumn(name="id_alumno")
     private Alumno alumnoColegiatura;
+
+    public Colegiatura() {
+    }
+
+    public Colegiatura(String motivo, double monto, Long idColegiatura, Date fecha, Alumno alumnoColegiatura) {
+        this.motivo = motivo;
+        this.monto = monto;
+        this.idColegiatura = idColegiatura;
+        this.fecha = fecha;
+        this.alumnoColegiatura = alumnoColegiatura;
+    }
+
+    public Long getIdColegiatura() {
+        return idColegiatura;
+    }
+
+    public void setIdColegiatura(Long idColegiatura) {
+        this.idColegiatura = idColegiatura;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Alumno getAlumnoColegiatura() {
+        return alumnoColegiatura;
+    }
+
+    public void setAlumnoColegiatura(Alumno alumnoColegiatura) {
+        this.alumnoColegiatura = alumnoColegiatura;
+    }
 }

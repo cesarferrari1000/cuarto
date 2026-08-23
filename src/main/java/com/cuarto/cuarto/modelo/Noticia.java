@@ -17,6 +17,7 @@ public class Noticia {
     private String encabezado;
     private Date fecha;
 
+
     public Noticia() {
     }
 

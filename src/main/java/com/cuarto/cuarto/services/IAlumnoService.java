@@ -8,7 +8,7 @@ public interface IAlumnoService {
 
     List<Alumno> traerAlumno();
     Alumno idAlumno(Long id);
-    Alumno InsertAlumno(Alumno alumno);
-    Alumno UpdateAlumno(Long id_alumno,Alumno al);
-    Boolean DeleteAlumno(Long id_alumno);
+    Alumno insertAlumno(Alumno alumno);
+    Alumno updateAlumno(Long id_alumno,Alumno al);
+    boolean deleteAlumno(Long id_alumno);
 }

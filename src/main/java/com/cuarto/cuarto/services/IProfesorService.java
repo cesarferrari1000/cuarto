@@ -8,4 +8,7 @@ public interface IProfesorService {
 
 
     List<Profesor> ListaProfesor();
+    Profesor buscaProfesor(Long matricula);
+    Profesor insertaProfesor(Profesor profesor);
+    Profesor editProfesor(Long id,Profesor profesor);
 }

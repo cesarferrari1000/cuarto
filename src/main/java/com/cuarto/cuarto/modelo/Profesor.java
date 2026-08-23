@@ -11,16 +11,84 @@ public class Profesor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_profesor")
+
     private Long idProfesor;
     private String nombre;
-    @Column(name="apellido_p")
+
     private String apellidoP;
-    @Column(name="apellido_m")
+
     private String apellidoM;
+    private String email;
+    @Column(unique = true, nullable = false)
     private String matricula;
     @OneToMany(mappedBy="profesor",cascade=CascadeType.ALL)
 
     private List<Asignatura> asignaturas=new ArrayList<>();
 
+    public Profesor() {
+    }
+
+    public Profesor(Long idProfesor, String apellidoP, String nombre, String apellidoM, String matricula, List<Asignatura> asignaturas,String email) {
+        this.idProfesor = idProfesor;
+        this.apellidoP = apellidoP;
+        this.nombre = nombre;
+        this.apellidoM = apellidoM;
+        this.matricula = matricula;
+        this.asignaturas = asignaturas;
+        this.email=email;
+    }
+
+    public Long getIdProfesor() {
+        return idProfesor;
+    }
+
+    public void setIdProfesor(Long idProfesor) {
+        this.idProfesor = idProfesor;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidoP() {
+        return apellidoP;
+    }
+
+    public void setApellidoP(String apellidoP) {
+        this.apellidoP = apellidoP;
+    }
+
+    public String getApellidoM() {
+        return apellidoM;
+    }
+
+    public void setApellidoM(String apellidoM) {
+        this.apellidoM = apellidoM;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public List<Asignatura> getAsignaturas() {
+        return asignaturas;
+    }
+
+    public void setAsignaturas(List<Asignatura> asignaturas) {
+        this.asignaturas = asignaturas;
+    }
+    public void setEmail(String email){
+        this.email=email;
+    }
+    public String getEmail(){
+        return email;
+    }
 }

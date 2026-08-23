@@ -22,5 +22,42 @@ public class IncidenciaAl {
 
     public IncidenciaAl(){}
 
+    public IncidenciaAl(Long idAlIncidencia, String incidencia, Date fecha, Servicios_escolares serviciosEscolaresAl) {
+        this.idAlIncidencia = idAlIncidencia;
+        this.incidencia = incidencia;
+        this.fecha = fecha;
+        this.serviciosEscolaresAl = serviciosEscolaresAl;
+    }
 
+    public Long getIdAlIncidencia() {
+        return idAlIncidencia;
+    }
+
+    public void setIdAlIncidencia(Long idAlIncidencia) {
+        this.idAlIncidencia = idAlIncidencia;
+    }
+
+    public String getIncidencia() {
+        return incidencia;
+    }
+
+    public void setIncidencia(String incidencia) {
+        this.incidencia = incidencia;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Servicios_escolares getServiciosEscolaresAl() {
+        return serviciosEscolaresAl;
+    }
+
+    public void setServiciosEscolaresAl(Servicios_escolares serviciosEscolaresAl) {
+        this.serviciosEscolaresAl = serviciosEscolaresAl;
+    }
 }

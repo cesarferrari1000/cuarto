@@ -8,14 +8,55 @@ import jakarta.persistence.*;
 public class Asignatura {
 @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-@Column(name="id_asignatura")
+
 private Long idAsignatura;
     private String asignatura;
-    @Column(name="nivel_educativo")
+
     private String nivelEducativo;
 
     @ManyToOne
     @JoinColumn(name="id_profesor")
     private Profesor profesor;
 
+    public Asignatura() {
+    }
+
+    public Asignatura(Long idAsignatura, String asignatura, String nivelEducativo, Profesor profesor) {
+        this.idAsignatura = idAsignatura;
+        this.asignatura = asignatura;
+        this.nivelEducativo = nivelEducativo;
+        this.profesor = profesor;
+    }
+
+    public Long getIdAsignatura() {
+        return idAsignatura;
+    }
+
+    public void setIdAsignatura(Long idAsignatura) {
+        this.idAsignatura = idAsignatura;
+    }
+
+    public String getAsignatura() {
+        return asignatura;
+    }
+
+    public void setAsignatura(String asignatura) {
+        this.asignatura = asignatura;
+    }
+
+    public String getNivelEducativo() {
+        return nivelEducativo;
+    }
+
+    public void setNivelEducativo(String nivelEducativo) {
+        this.nivelEducativo = nivelEducativo;
+    }
+
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
+    }
 }

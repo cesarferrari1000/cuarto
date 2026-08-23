@@ -4,18 +4,18 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Alumno")
+
 public class Alumno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String nombre;
-    @Column(name="apellido_p")
+
     private String apellidoP;
-    @Column(name="apellido_m")
+
     private String apellidoM;
-    @Column(name="matricula")
+
     private String matricula;
 
     public Alumno(Long id, String nombre, String apellidoP, String apellidoM, String matricula) {

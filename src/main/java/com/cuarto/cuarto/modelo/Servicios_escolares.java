@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="servicios_escolares")
+
 public class Servicios_escolares {
 @Id
 @GeneratedValue(strategy=GenerationType.IDENTITY)
-@Column(name="id_services")
+
 private Long idServices;
 private String nombre;
-@Column(name="apellido_p")
+
 private String apellidoP;
-@Column(name="apellido_m")
+
 private String apellidoM;
 private String matricula;
 private String email;

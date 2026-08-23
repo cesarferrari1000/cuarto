@@ -3,6 +3,7 @@ package com.cuarto.cuarto.controllers;
 import com.cuarto.cuarto.modelo.Alumno;
 import com.cuarto.cuarto.reposositories.IAlumnoRepository;
 import com.cuarto.cuarto.services.IAlumnoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -14,54 +15,45 @@ import java.util.List;
 @RequestMapping("/api/Alumno")
 
 public class AlumnoController {
-private final IAlumnoService repository;
 
-    public AlumnoController(IAlumnoService repository) {
-        this.repository = repository;
+private final IAlumnoService service;
+
+    public AlumnoController(IAlumnoService service) {
+        this.service = service;
     }
 
     @GetMapping
     public List<Alumno> traerAlumno(){
 
-        return repository.traerAlumno();
+        return service.traerAlumno();
     }
-     @GetMapping("/{codAlumno}")
+     @GetMapping("/{codAlumn}")
     public ResponseEntity<?>buscarAlumno(@PathVariable Long codAlumn){
-             Alumno alumno=repository.idAlumno(codAlumn);
-             if(alumno==null){
-                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                         .body("no se encuentra un alumno con este codigo");
-             }
-        return ResponseEntity.ok(alumno);
+             Alumno alumno=service.idAlumno(codAlumn);
+
+        return ResponseEntity.ok(service.idAlumno(codAlumn));
      }
      @PostMapping
     public ResponseEntity<?>insertAlumno(@RequestBody Alumno al){
 
-        Alumno alumnocreado=repository.InsertAlumno(al);
-         if(alumnocreado==null){
-             return ResponseEntity.badRequest().body("no me enviaste ningun alumno");
-         }
+        Alumno alumnocreado=service.insertAlumno(al);
+
          return ResponseEntity.status(HttpStatus.CREATED).body(alumnocreado);
     }
 
-@PutMapping("/{codAlumno}")
+@PutMapping("/{codAlumn}")
     public ResponseEntity<?>updateAlumno(@PathVariable Long codAlumn,
                                          @RequestBody Alumno alumno ){
-                Alumno alumnoditado=repository.UpdateAlumno(codAlumn,alumno);
-                if(alumnoditado==null){
-                   return ResponseEntity.badRequest().body("no fue posible editar el alumno");
-                }
-              return ResponseEntity.ok(alumnoditado);
+                Alumno alumnoditado=service.updateAlumno(codAlumn,alumno);
+
+    return ResponseEntity.ok(service.updateAlumno(codAlumn, alumno));
 
 }
-   @DeleteMapping("/{codAlumno}")
+   @DeleteMapping("/{codAlumn}")
 
-    public ResponseEntity<String>DeleteAlumno(@PathVariable Long id){
-    Boolean alumnoEliminado=repository.DeleteAlumno(id);
-    if(alumnoEliminado==false){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body("no se encuentra un alumno con este codigo");
-    }
+    public ResponseEntity<String>deleteAlumno(@PathVariable Long codAlumn){
+    service.deleteAlumno(codAlumn);
+
     return ResponseEntity.ok("producto eliminado correctamente");
    }
 

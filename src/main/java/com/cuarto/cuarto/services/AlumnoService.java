@@ -1,7 +1,9 @@
 package com.cuarto.cuarto.services;
 
 import com.cuarto.cuarto.modelo.Alumno;
+import com.cuarto.cuarto.modelo.RecursoNoEncontradoException;
 import com.cuarto.cuarto.reposositories.IAlumnoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,25 +26,24 @@ public class AlumnoService implements IAlumnoService{
 
     @Override
     public Alumno idAlumno(Long id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id)
+                .orElseThrow(()->new RecursoNoEncontradoException("alumno no encontrado con id"+id));
     }
 
     @Override
-    public Alumno InsertAlumno(Alumno alumno) {
+    public Alumno insertAlumno(Alumno alumno) {
         if(alumno==null){
-            return null;
+            throw new IllegalArgumentException("El alumno no puede ser nulo");
         }
 
         return repository.save(alumno);
     }
 
     @Override
-    public Alumno UpdateAlumno(Long id_alumno, Alumno al) {
+    @Transactional
+    public Alumno updateAlumno(Long id_alumno, Alumno al) {
        Alumno alumn=idAlumno(id_alumno);
-       if(alumn==null){
-           return null;
 
-       }
        alumn.setNombre(al.getNombre());
        alumn.setApellidoP(al.getApellidoP());
        alumn.setApellidoM(al.getApellidoM());
@@ -53,11 +54,10 @@ public class AlumnoService implements IAlumnoService{
     }
 
     @Override
-    public Boolean DeleteAlumno(Long id_alumno) {
+    @Transactional
+    public boolean deleteAlumno(Long id_alumno) {
         Alumno alumnoDelete=idAlumno(id_alumno);
-        if(alumnoDelete==null){
-            return null;
-        }
+
         repository.delete(alumnoDelete);
         return true;
     }
