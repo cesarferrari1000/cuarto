@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AlumnoService implements IAlumnoService{
@@ -35,8 +36,29 @@ public class AlumnoService implements IAlumnoService{
         if(alumno==null){
             throw new IllegalArgumentException("El alumno no puede ser nulo");
         }
-
+        String nuevaMatricula = generarMatricula();
+        System.out.println("Matricula generada: " + nuevaMatricula); // debug temporal
+        alumno.setMatricula(nuevaMatricula);
         return repository.save(alumno);
+
+    }
+
+    private String generarMatricula() {
+        Optional<Alumno> ultimo = repository.findTopByOrderByIdDesc();
+
+        int siguienteNumero = 9001; // valor inicial
+
+        if (ultimo.isPresent()) {
+            String matriculaAnterior = ultimo.get().getMatricula();
+            try {
+                siguienteNumero = Integer.parseInt(matriculaAnterior) + 1;
+            } catch (NumberFormatException | NullPointerException e) {
+                // si la matrícula anterior está vacía, null o corrupta, seguimos con 9001
+                siguienteNumero = 9001;
+            }
+        }
+
+        return String.valueOf(siguienteNumero);
     }
 
     @Override
@@ -47,8 +69,14 @@ public class AlumnoService implements IAlumnoService{
        alumn.setNombre(al.getNombre());
        alumn.setApellidoP(al.getApellidoP());
        alumn.setApellidoM(al.getApellidoM());
-       alumn.setMatricula(al.getMatricula());
-       alumn.setId(al.getId());
+      // alumn.setMatricula(al.getMatricula());
+
+       alumn.setGrupo(al.getGrupo());
+       alumn.setNivelEducativo(al.getNivelEducativo());
+       alumn.setTipoUsuario(al.getTipoUsuario());
+       alumn.setTurno(al.getTurno());
+       alumn.setPassword(al.getPassword());
+       alumn.setEmail(al.getEmail());
 
         return repository.save(alumn);
     }

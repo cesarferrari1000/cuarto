@@ -16,17 +16,17 @@ public class Colegiatura {
     private Date fecha;
     @ManyToOne
     @JoinColumn(name="id_alumno")
-    private Alumno alumnoColegiatura;
+    private Alumno alumno;
 
     public Colegiatura() {
     }
 
-    public Colegiatura(String motivo, double monto, Long idColegiatura, Date fecha, Alumno alumnoColegiatura) {
+    public Colegiatura(String motivo, double monto, Long idColegiatura, Date fecha, Alumno alumno) {
         this.motivo = motivo;
         this.monto = monto;
         this.idColegiatura = idColegiatura;
         this.fecha = fecha;
-        this.alumnoColegiatura = alumnoColegiatura;
+        this.alumno = alumno;
     }
 
     public Long getIdColegiatura() {
@@ -61,11 +61,11 @@ public class Colegiatura {
         this.fecha = fecha;
     }
 
-    public Alumno getAlumnoColegiatura() {
-        return alumnoColegiatura;
+    public Alumno getAlumno() {
+        return alumno;
     }
 
-    public void setAlumnoColegiatura(Alumno alumnoColegiatura) {
-        this.alumnoColegiatura = alumnoColegiatura;
+    public void setAlumno(Alumno alumnoColegiatura) {
+        this.alumno = alumno;
     }
 }

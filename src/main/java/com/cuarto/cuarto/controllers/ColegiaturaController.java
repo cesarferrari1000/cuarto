@@ -1,0 +1,50 @@
+package com.cuarto.cuarto.controllers;
+
+
+import com.cuarto.cuarto.modelo.Colegiatura;
+import com.cuarto.cuarto.services.IColegiaturaService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/colegiatura")
+public class ColegiaturaController {
+    private final IColegiaturaService service;
+
+    public ColegiaturaController(IColegiaturaService service) {
+        this.service = service;
+    }
+     @GetMapping
+    public List<Colegiatura>colegiaturaList(){
+        return service.listColegiatura();
+    }
+    @GetMapping("/{codCol}")
+    public ResponseEntity<?>buscarColegiatura(@PathVariable Long codCol){
+      Optional<Colegiatura> colI=service.colegiaturaFindById(codCol);
+        return ResponseEntity.ok(colI);
+    }
+    @PostMapping
+    public ResponseEntity<?>insertColegiatura(@RequestBody Colegiatura col){
+        Colegiatura insertCol=service.insertColegiatura(col);
+        return ResponseEntity.status(HttpStatus.CREATED).body(insertCol);
+
+    }
+    @PutMapping("/{codCol}")
+    public ResponseEntity<?>updateColegiatura(@RequestBody Colegiatura col,@PathVariable Long codCol){
+        Colegiatura upCol=service.updateColegiatura(col,codCol);
+        return ResponseEntity.ok(upCol);
+
+    }
+    @DeleteMapping("/{codCol}")
+    public ResponseEntity<?>deleteCol(@PathVariable Long codCol){
+        service.deleteColegiatura(codCol);
+        return ResponseEntity.ok("colegiatura eliminada correctamente");
+
+    }
+
+
+}

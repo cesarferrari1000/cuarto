@@ -21,6 +21,7 @@ public class Profesor {
     private String email;
     @Column(unique = true, nullable = false)
     private String matricula;
+    private String password;
     @OneToMany(mappedBy="profesor",cascade=CascadeType.ALL)
 
     private List<Asignatura> asignaturas=new ArrayList<>();
@@ -90,5 +91,13 @@ public class Profesor {
     }
     public String getEmail(){
         return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

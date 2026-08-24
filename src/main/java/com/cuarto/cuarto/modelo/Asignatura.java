@@ -1,8 +1,9 @@
 package com.cuarto.cuarto.modelo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
+@JsonIgnoreProperties("asignaturas")
 @Entity
 
 public class Asignatura {

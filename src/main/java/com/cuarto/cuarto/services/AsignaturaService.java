@@ -1,9 +1,12 @@
 package com.cuarto.cuarto.services;
 
 import com.cuarto.cuarto.modelo.Asignatura;
+import com.cuarto.cuarto.modelo.Profesor;
 import com.cuarto.cuarto.modelo.RecursoNoEncontradoException;
 import com.cuarto.cuarto.reposositories.IAsignaturaRepository;
+import com.cuarto.cuarto.reposositories.IProfesorRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,12 +14,14 @@ import java.util.List;
 @Service
 public class AsignaturaService implements IAsignaturaService{
     private final IAsignaturaRepository repository;
-
-    public AsignaturaService(IAsignaturaRepository repository) {
+  //  private final IProfesorRepository profesorRepository;
+    public AsignaturaService(IAsignaturaRepository repository,IProfesorRepository profesorRepository){
         this.repository = repository;
+      //  this.profesorRepository=profesorRepository;
     }
 
     @Override
+
     public List<Asignatura> buscarAsignatura() {
         return repository.findAll();
     }
@@ -27,11 +32,14 @@ public class AsignaturaService implements IAsignaturaService{
                 .orElseThrow(()->new RecursoNoEncontradoException("Asignatura no encontrada con el id "+idAsignatura));
     }
 
+
+
     @Override
     public Asignatura insertAsignatura(Asignatura asignatura) {
         if(asignatura==null){
             throw new IllegalArgumentException("El alumno no puede ser nulo");
         }
+
         return repository.save(asignatura);
     }
 

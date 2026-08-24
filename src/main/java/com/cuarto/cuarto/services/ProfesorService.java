@@ -1,6 +1,7 @@
 package com.cuarto.cuarto.services;
 
 
+import com.cuarto.cuarto.modelo.Alumno;
 import com.cuarto.cuarto.modelo.Profesor;
 import com.cuarto.cuarto.modelo.RecursoNoEncontradoException;
 import com.cuarto.cuarto.reposositories.IProfesorRepository;
@@ -34,9 +35,30 @@ public class ProfesorService implements IProfesorService{
 
     @Override
     public Profesor insertaProfesor(Profesor profesor) {
-        throw new IllegalArgumentException("El alumno no puede ser nulo");
-    }
+        if(profesor==null){throw new IllegalArgumentException("El alumno no puede ser nulo");}
 
+        String nuevaMatricula = generarMatricula();
+        System.out.println("Matricula generada: " + nuevaMatricula); // debug temporal
+        profesor.setMatricula(nuevaMatricula);
+        return repository.save(profesor);
+    }
+    private String generarMatricula() {
+        Optional<Profesor> ultimo = repository.findTopByOrderByIdProfesorDesc();
+
+        int siguienteNumero = 901; // valor inicial
+
+        if (ultimo.isPresent()) {
+            String matriculaAnterior = ultimo.get().getMatricula();
+            try {
+                siguienteNumero = Integer.parseInt(matriculaAnterior) + 1;
+            } catch (NumberFormatException | NullPointerException e) {
+                // si la matrícula anterior está vacía, null o corrupta, seguimos con 9001
+                siguienteNumero = 9001;
+            }
+        }
+
+        return String.valueOf(siguienteNumero);
+    }
     @Override
     @Transactional
     public Profesor editProfesor(Long id, Profesor profesor) {
@@ -45,8 +67,8 @@ public class ProfesorService implements IProfesorService{
         profEdit.setApellidoM(profesor.getApellidoM());
         profEdit.setApellidoP(profesor.getApellidoP());
         profEdit.setEmail(profesor.getEmail());
-        profEdit.setMatricula(profesor.getMatricula());
-
+        //profEdit.setMatricula(profesor.getMatricula());
+        profEdit.setPassword(profesor.getPassword());
         return repository.save(profEdit);
     }
 }
