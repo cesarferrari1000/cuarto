@@ -27,6 +27,7 @@ private final IAlumnoService service;
 
         return service.traerAlumno();
     }
+   
      @GetMapping("/{codAlumn}")
     public ResponseEntity<?>buscarAlumno(@PathVariable Long codAlumn){
              Alumno alumno=service.idAlumno(codAlumn);

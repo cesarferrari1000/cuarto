@@ -1,12 +1,10 @@
 package com.cuarto.cuarto.services;
 
 import com.cuarto.cuarto.modelo.Asignatura;
-import com.cuarto.cuarto.modelo.Profesor;
-import com.cuarto.cuarto.modelo.RecursoNoEncontradoException;
+import com.cuarto.cuarto.exepciones.RecursoNoEncontradoException;
 import com.cuarto.cuarto.reposositories.IAsignaturaRepository;
 import com.cuarto.cuarto.reposositories.IProfesorRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

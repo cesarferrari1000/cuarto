@@ -3,10 +3,12 @@ package com.cuarto.cuarto.controllers;
 
 import com.cuarto.cuarto.modelo.Colegiatura;
 import com.cuarto.cuarto.services.IColegiaturaService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +28,24 @@ public class ColegiaturaController {
     public ResponseEntity<?>buscarColegiatura(@PathVariable Long codCol){
       Optional<Colegiatura> colI=service.colegiaturaFindById(codCol);
         return ResponseEntity.ok(colI);
+    }
+    @GetMapping("/buscar")
+    public ResponseEntity<?> buscarPorMatriculaYFecha(
+            @RequestParam String matricula,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin) {
+
+        List<Colegiatura> resultado = service.listByMatriculaAndFecha(matricula, fechaInicio, fechaFin);
+        return ResponseEntity.ok(resultado);
+    }
+    @GetMapping("/buscar-por-fecha")
+    public ResponseEntity<?> buscarPorFecha(
+
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin) {
+
+        List<Colegiatura> resultado = service.ListfindByFechaBetween( fechaInicio, fechaFin);
+        return ResponseEntity.ok(resultado);
     }
     @PostMapping
     public ResponseEntity<?>insertColegiatura(@RequestBody Colegiatura col){

@@ -65,7 +65,8 @@ public class Colegiatura {
         return alumno;
     }
 
-    public void setAlumno(Alumno alumnoColegiatura) {
+    public void setAlumno(Alumno alumno) {
+
         this.alumno = alumno;
     }
 }

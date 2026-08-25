@@ -1,4 +1,4 @@
-package com.cuarto.cuarto.modelo;
+package com.cuarto.cuarto.exepciones;
 
 public class RecursoNoEncontradoException extends RuntimeException{
 

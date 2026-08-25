@@ -11,4 +11,6 @@ public interface IAlumnoService {
     Alumno insertAlumno(Alumno alumno);
     Alumno updateAlumno(Long id_alumno,Alumno al);
     boolean deleteAlumno(Long id_alumno);
+    List<Alumno>listaAlumnos(List<Alumno>alumnos);
+     Alumno personalizarPrimerInicio(Long id, String emailNuevo, String passwordNuevo);
 }

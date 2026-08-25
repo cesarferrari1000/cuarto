@@ -31,6 +31,7 @@ public class AsignaturaController {
     @PostMapping
     public ResponseEntity<?>insertAsignatura(@RequestBody Asignatura request){
        Asignatura asigInsert=service.insertAsignatura(request);
+
        return ResponseEntity.status(HttpStatus.CREATED).body(asigInsert);
 
     }

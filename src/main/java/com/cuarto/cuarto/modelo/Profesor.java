@@ -21,6 +21,7 @@ public class Profesor {
     private String email;
     @Column(unique = true, nullable = false)
     private String matricula;
+
     private String password;
     @OneToMany(mappedBy="profesor",cascade=CascadeType.ALL)
 
@@ -99,5 +100,11 @@ public class Profesor {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    @PrePersist
+    public void prePersist() {
+        if (this.password == null || this.password.isBlank()) {
+            this.password = "profesor"; // o genera uno aleatorio, o el que definas
+        }
     }
 }

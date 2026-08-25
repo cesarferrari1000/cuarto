@@ -1,7 +1,7 @@
 package com.cuarto.cuarto.services;
 
 import com.cuarto.cuarto.modelo.Alumno;
-import com.cuarto.cuarto.modelo.RecursoNoEncontradoException;
+import com.cuarto.cuarto.exepciones.RecursoNoEncontradoException;
 import com.cuarto.cuarto.reposositories.IAlumnoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -88,5 +88,44 @@ public class AlumnoService implements IAlumnoService{
 
         repository.delete(alumnoDelete);
         return true;
+    }
+
+    @Override
+    public List<Alumno> listaAlumnos(List<Alumno> alumnos) {
+        if(alumnos==null||alumnos.isEmpty()){
+            return null;
+        }
+        for (Alumno a : alumnos) {
+            a.setTipoUsuario("alumno");
+            a.setPassword("alumno");
+             a.setPrimerInicio(true);
+            a.setEmail(null);
+        }
+
+        List<Alumno> guardados = repository.saveAll(alumnos);
+
+        for (Alumno a : guardados) {
+            a.setEmail(a.getId() + "alumno@none.com");
+        }
+
+        return repository.saveAll(guardados);
+
+
+    }
+    @Override
+    @Transactional
+    public Alumno personalizarPrimerInicio(Long idAlumno, String emailNuevo, String passwordNuevo) {
+        Alumno alumno = repository.findById(idAlumno)
+                .orElseThrow(() -> new RecursoNoEncontradoException("alumno no encontrado con id " + idAlumno));
+
+        if (!alumno.isPrimerInicio()) {
+            throw new IllegalStateException("Este alumno ya personalizó sus credenciales");
+        }
+
+        alumno.setEmail(emailNuevo);
+        alumno.setPassword(passwordNuevo); // aquí deberías encriptarlo, ver nota abajo
+        alumno.setPrimerInicio(false);
+
+        return repository.save(alumno);
     }
 }

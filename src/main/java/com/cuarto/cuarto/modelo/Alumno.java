@@ -22,7 +22,15 @@ public class Alumno {
     private String grupo;
     private String tipoUsuario;
     private String password;
+    private boolean primerInicio = true;
 
+    public boolean isPrimerInicio() {
+        return primerInicio;
+    }
+
+    public void setPrimerInicio(boolean primerInicio) {
+        this.primerInicio = primerInicio;
+    }
 
     public void setEmail(String email){
         this.email=email;
@@ -139,4 +147,6 @@ public class Alumno {
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
+
+
 }
