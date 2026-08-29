@@ -3,6 +3,9 @@ package com.cuarto.cuarto.modelo;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 
 public class Alumno {
@@ -23,6 +26,16 @@ public class Alumno {
     private String tipoUsuario;
     private String password;
     private boolean primerInicio = true;
+    @OneToMany(mappedBy = "serviciosEscolaresAl", cascade = CascadeType.ALL)
+    private List<IncidenciaAl> incidenciaAl = new ArrayList<>();
+
+    public List<IncidenciaAl> getIncidenciaAl() {
+        return incidenciaAl;
+    }
+
+    public void setIncidenciaAl(List<IncidenciaAl> incidenciaAl) {
+        this.incidenciaAl = incidenciaAl;
+    }
 
     public boolean isPrimerInicio() {
         return primerInicio;
@@ -89,7 +102,8 @@ public class Alumno {
         this.password = password;
     }
 
-    public Alumno(Long id, String nombre, String apellidoP, String matricula, String apellidoM,
+    public Alumno(Long id, String nombre, String apellidoP, String matricula,
+                  String apellidoM,
                   String nivelEducativo, String turno, String tipoUsuario,
                   String password, String grupo,String email) {
         this.id = id;
@@ -103,6 +117,24 @@ public class Alumno {
         this.password = password;
         this.grupo = grupo;
         this.email=email;
+    }
+
+    public Alumno(Long id, String nombre, String apellidoP, String apellidoM, String email,
+                  String matricula, String nivelEducativo, String turno, String grupo, String tipoUsuario,
+                  String password, boolean primerInicio, List<IncidenciaAl> incidenciaAl) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.email = email;
+        this.matricula = matricula;
+        this.nivelEducativo = nivelEducativo;
+        this.turno = turno;
+        this.grupo = grupo;
+        this.tipoUsuario = tipoUsuario;
+        this.password = password;
+        this.primerInicio = primerInicio;
+        this.incidenciaAl = incidenciaAl;
     }
 
     public Alumno(Long id, String nombre, String apellidoP, String apellidoM, String matricula) {

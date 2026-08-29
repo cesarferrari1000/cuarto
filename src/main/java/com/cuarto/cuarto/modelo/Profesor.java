@@ -26,11 +26,33 @@ public class Profesor {
     @OneToMany(mappedBy="profesor",cascade=CascadeType.ALL)
 
     private List<Asignatura> asignaturas=new ArrayList<>();
+    @OneToMany(mappedBy = "serviciosEscolaresProf", cascade = CascadeType.ALL)
+    private List<IncidenciaProf> incidenciaProf = new ArrayList<>();
+
+    public List<IncidenciaProf> getIncidenciaProf() {
+        return incidenciaProf;
+    }
+
+    public void setIncidenciaProf(List<IncidenciaProf> incidenciaProf) {
+        this.incidenciaProf = incidenciaProf;
+    }
 
     public Profesor() {
     }
 
-    public Profesor(Long idProfesor, String apellidoP, String nombre, String apellidoM, String matricula, List<Asignatura> asignaturas,String email) {
+    public Profesor(Long idProfesor, String apellidoP, String nombre, String apellidoM, String matricula, String email, String password, List<Asignatura> asignaturas, List<IncidenciaProf> incidenciaProf) {
+        this.idProfesor = idProfesor;
+        this.apellidoP = apellidoP;
+        this.nombre = nombre;
+        this.apellidoM = apellidoM;
+        this.matricula = matricula;
+        this.email = email;
+        this.password = password;
+        this.asignaturas = asignaturas;
+        this.incidenciaProf = incidenciaProf;
+    }
+
+    public Profesor(Long idProfesor, String apellidoP, String nombre, String apellidoM, String matricula, List<Asignatura> asignaturas, String email) {
         this.idProfesor = idProfesor;
         this.apellidoP = apellidoP;
         this.nombre = nombre;

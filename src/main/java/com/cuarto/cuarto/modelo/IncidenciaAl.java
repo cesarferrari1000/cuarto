@@ -17,12 +17,12 @@ public class IncidenciaAl {
 
     @ManyToOne
             @JoinColumn(name="id_alumno")
-    private Servicios_escolares serviciosEscolaresAl;
+    private Alumno serviciosEscolaresAl;
 
 
     public IncidenciaAl(){}
 
-    public IncidenciaAl(Long idAlIncidencia, String incidencia, Date fecha, Servicios_escolares serviciosEscolaresAl) {
+    public IncidenciaAl(Long idAlIncidencia, String incidencia, Date fecha, Alumno serviciosEscolaresAl) {
         this.idAlIncidencia = idAlIncidencia;
         this.incidencia = incidencia;
         this.fecha = fecha;
@@ -53,11 +53,11 @@ public class IncidenciaAl {
         this.fecha = fecha;
     }
 
-    public Servicios_escolares getServiciosEscolaresAl() {
+    public Alumno getServiciosEscolaresAl() {
         return serviciosEscolaresAl;
     }
 
-    public void setServiciosEscolaresAl(Servicios_escolares serviciosEscolaresAl) {
+    public void setServiciosEscolaresAl(Alumno serviciosEscolaresAl) {
         this.serviciosEscolaresAl = serviciosEscolaresAl;
     }
 }

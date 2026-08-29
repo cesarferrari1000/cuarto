@@ -28,16 +28,28 @@ public class IncidenciaService implements IIncidenciaService{
 
     @Override
     public Incidencia insertInc(Incidencia incAl) {
-        return null;
+        if(incAl==null){
+            throw new IllegalArgumentException("");
+
+        }
+        return repository.save(incAl);
+
+
     }
 
     @Override
     public Incidencia updateInc(Incidencia incidencia, Long idInc) {
-        return null;
+
+        Incidencia upInc =incFindById(idInc);
+        upInc.setFecha(incidencia.getFecha());
+        upInc.setIncidencia(incidencia.getIncidencia());
+        return repository.save(upInc);
     }
 
     @Override
     public boolean deleteInc(Long idInc) {
-        return false;
+        Incidencia delInc=incFindById(idInc);
+        repository.delete(delInc);
+        return true;
     }
 }

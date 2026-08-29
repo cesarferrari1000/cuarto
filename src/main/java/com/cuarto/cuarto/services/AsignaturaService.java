@@ -27,7 +27,8 @@ public class AsignaturaService implements IAsignaturaService{
     @Override
     public Asignatura asignaturaFindById(Long idAsignatura) {
         return repository.findById(idAsignatura)
-                .orElseThrow(()->new RecursoNoEncontradoException("Asignatura no encontrada con el id "+idAsignatura));
+                .orElseThrow(()->
+                        new RecursoNoEncontradoException("Asignatura no encontrada con el id "+idAsignatura));
     }
 
 
