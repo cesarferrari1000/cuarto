@@ -3,7 +3,7 @@ package com.cuarto.cuarto.modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-@JsonIgnoreProperties("asignaturas")
+
 @Entity
 
 public class Asignatura {
@@ -16,6 +16,7 @@ private Long idAsignatura;
     private String nivelEducativo;
 
     @ManyToOne
+    @JsonIgnoreProperties({"incidenciaProf","asignaturas"})
     @JoinColumn(name="id_profesor")
     private Profesor profesor;
 

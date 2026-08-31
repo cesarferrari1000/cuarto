@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface IProfesorRepository extends JpaRepository<Profesor,Long> {
     Optional<Profesor> findTopByOrderByIdProfesorDesc();
+    boolean existsByEmailIgnoreCase(String email);
+    boolean existsByEmailIgnoreCaseAndIdProfesorNot(String email, Long idProfesor);
 }

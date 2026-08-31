@@ -3,6 +3,8 @@ package com.cuarto.cuarto.services;
 import com.cuarto.cuarto.modelo.Alumno;
 import com.cuarto.cuarto.exepciones.RecursoNoEncontradoException;
 import com.cuarto.cuarto.reposositories.IAlumnoRepository;
+import com.cuarto.cuarto.reposositories.IProfesorRepository;
+import com.cuarto.cuarto.reposositories.IServiciosEscolaresRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,14 @@ import java.util.Optional;
 public class AlumnoService implements IAlumnoService{
 
     private final IAlumnoRepository repository;
+     private final IServiciosEscolaresRepository SeRepository;
+     private final IProfesorRepository profRepository;
 
-    public AlumnoService(IAlumnoRepository repository) {
+    public AlumnoService(IAlumnoRepository repository, IServiciosEscolaresRepository seRepository,
+                         IProfesorRepository profRepository) {
         this.repository = repository;
+        SeRepository = seRepository;
+        this.profRepository = profRepository;
     }
 
     @Override
@@ -36,13 +43,23 @@ public class AlumnoService implements IAlumnoService{
         if(alumno==null){
             throw new IllegalArgumentException("El alumno no puede ser nulo");
         }
+        if(validaEmail(alumno.getEmail())){
+            throw new RecursoNoEncontradoException("el email ya existe en la base de datos utilice otro");
+        }
         String nuevaMatricula = generarMatricula();
         System.out.println("Matricula generada: " + nuevaMatricula); // debug temporal
         alumno.setMatricula(nuevaMatricula);
         return repository.save(alumno);
 
     }
+     private boolean validaEmail(String email){
+        if(repository.existsByEmailIgnoreCase(email)||
+        profRepository.existsByEmailIgnoreCase(email)||
+        SeRepository.existsByEmailIgnoreCase(email)){
+            return true;
 
+        }else{return false;}
+     }
     private String generarMatricula() {
         Optional<Alumno> ultimo = repository.findTopByOrderByIdDesc();
 

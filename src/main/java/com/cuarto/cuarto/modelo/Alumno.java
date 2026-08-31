@@ -18,7 +18,9 @@ public class Alumno {
     private String apellidoP;
 
     private String apellidoM;
+    @Column(unique=true)
      private String email;
+    @Column(unique=true)
     private String matricula;
     private String nivelEducativo;
     private String turno;

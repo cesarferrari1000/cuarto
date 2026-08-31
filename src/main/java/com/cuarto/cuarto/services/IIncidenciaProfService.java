@@ -12,5 +12,5 @@ public interface IIncidenciaProfService {
     IncidenciaProf incFindById(Long idInc);
     IncidenciaProf insertInc(IncidenciaProf incAl);
     IncidenciaProf updateInc(IncidenciaProf incAl,Long idInc);
-    boolean deleteInc(Long idInc);
+    void deleteInc(Long idInc);
 }

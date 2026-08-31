@@ -27,7 +27,7 @@ public class Profesor {
 
     private List<Asignatura> asignaturas=new ArrayList<>();
     @OneToMany(mappedBy = "serviciosEscolaresProf", cascade = CascadeType.ALL)
-    private List<IncidenciaProf> incidenciaProf = new ArrayList<>();
+    private List<IncidenciaProf>incidenciaProf= new ArrayList<>();
 
     public List<IncidenciaProf> getIncidenciaProf() {
         return incidenciaProf;

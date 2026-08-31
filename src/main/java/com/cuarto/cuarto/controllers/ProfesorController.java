@@ -39,4 +39,9 @@ public class ProfesorController {
         return ResponseEntity.ok(profEdit);
 
     }
+    @DeleteMapping("/{idProf}")
+    public ResponseEntity<?>delProfesor(@PathVariable Long idProf){
+        service.deleteProfesor(idProf);
+        return ResponseEntity.ok("profesor eliminado correctamente");
+    }
 }

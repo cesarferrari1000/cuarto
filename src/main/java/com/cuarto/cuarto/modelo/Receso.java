@@ -66,4 +66,6 @@ public class Receso {
     public void setAsignaturaAlumnoReceso(AsignaturaAlumno asignaturaAlumnoReceso) {
         this.asignaturaAlumnoReceso = asignaturaAlumnoReceso;
     }
+
+
 }

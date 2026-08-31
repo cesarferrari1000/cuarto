@@ -37,5 +37,18 @@ public class IncidenciaProfController {
         return ResponseEntity.status(HttpStatus.CREATED).body(insertIProf);
 
     }
+    @PutMapping("/{idProf}")
+    public ResponseEntity<?>upIncProf(@PathVariable Long idProf,@RequestBody IncidenciaProf incProf){
+        IncidenciaProf Iprofesor=service.updateInc(incProf,idProf);
+        return ResponseEntity.ok(Iprofesor);
+
+    }
+    @DeleteMapping("/{idProf}")
+    public ResponseEntity<?>delProf(@PathVariable Long idProf){
+        service.deleteInc(idProf);
+        return ResponseEntity.ok("incidencia de profesor eliminado correctamente");
+
+    }
+
 
 }

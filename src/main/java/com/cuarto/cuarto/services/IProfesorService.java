@@ -11,4 +11,5 @@ public interface IProfesorService {
     Profesor buscaProfesor(Long matricula);
     Profesor insertaProfesor(Profesor profesor);
     Profesor editProfesor(Long id,Profesor profesor);
+    void deleteProfesor(Long id);
 }

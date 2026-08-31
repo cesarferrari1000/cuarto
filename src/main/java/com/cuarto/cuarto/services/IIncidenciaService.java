@@ -12,5 +12,5 @@ public interface IIncidenciaService {
     Incidencia incFindById(Long idInc);
     Incidencia insertInc(Incidencia incAl);
     Incidencia updateInc(Incidencia incidencia,Long idInc);
-    boolean deleteInc(Long idInc);
+    void deleteInc(Long idInc);
 }

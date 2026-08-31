@@ -11,6 +11,6 @@ public interface IIncideciaAlService {
     IncidenciaAl incFindById(Long idInc);
     IncidenciaAl insertInc(IncidenciaAl incAl);
     IncidenciaAl updateInc(IncidenciaAl incidenciaAl,Long idInc);
-    boolean deleteInc(Long idInc);
+    void deleteInc(Long idInc);
 
 }

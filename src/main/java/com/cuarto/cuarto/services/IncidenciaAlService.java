@@ -1,7 +1,9 @@
 package com.cuarto.cuarto.services;
 
 import com.cuarto.cuarto.exepciones.RecursoNoEncontradoException;
+import com.cuarto.cuarto.modelo.Alumno;
 import com.cuarto.cuarto.modelo.IncidenciaAl;
+import com.cuarto.cuarto.reposositories.IAlumnoRepository;
 import com.cuarto.cuarto.reposositories.IIncidenciaAlRepository;
 import com.cuarto.cuarto.reposositories.IIncidenciaRepository;
 import jakarta.transaction.Transactional;
@@ -12,9 +14,11 @@ import java.util.List;
 public class IncidenciaAlService implements IIncideciaAlService{
 
       private final IIncidenciaAlRepository repository;
+      private final IAlumnoRepository AlRepository;
 
-    public IncidenciaAlService(IIncidenciaAlRepository repository) {
+    public IncidenciaAlService(IIncidenciaAlRepository repository, IAlumnoRepository alRepository) {
         this.repository = repository;
+        AlRepository = alRepository;
     }
 
     @Override
@@ -32,10 +36,12 @@ public class IncidenciaAlService implements IIncideciaAlService{
     @Override
     public IncidenciaAl insertInc(IncidenciaAl incAl) {
         if(incAl==null){
-
             throw new IllegalArgumentException("incidencia invalida ");
-
-
+        }
+        if(incAl.getServiciosEscolaresAl()!=null&&incAl.getServiciosEscolaresAl().getId()!=null){
+            Alumno alumnoCompleto=AlRepository.findById(incAl.getServiciosEscolaresAl().getId())
+                    .orElseThrow(()->new RecursoNoEncontradoException("Alumno no encontrado"));
+            incAl.setServiciosEscolaresAl(alumnoCompleto);
         }
 
         return repository.save(incAl);
@@ -53,9 +59,8 @@ public class IncidenciaAlService implements IIncideciaAlService{
 
     @Override
     @Transactional
-    public boolean deleteInc(Long idInc) {
+    public void deleteInc(Long idInc) {
         IncidenciaAl delInc =incFindById(idInc);
         repository.delete(delInc);
-       return true;
     }
 }

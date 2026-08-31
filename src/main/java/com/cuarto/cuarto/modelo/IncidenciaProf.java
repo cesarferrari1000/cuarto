@@ -1,6 +1,7 @@
 package com.cuarto.cuarto.modelo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class IncidenciaProf {
 
     @ManyToOne
     @JoinColumn(name="id_prof")
+    @JsonIgnoreProperties({"incidenciaProf","asignaturas"})
    private Profesor serviciosEscolaresProf;
 
     public IncidenciaProf() {

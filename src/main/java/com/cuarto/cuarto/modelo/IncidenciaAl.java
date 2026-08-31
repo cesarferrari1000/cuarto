@@ -1,6 +1,7 @@
 package com.cuarto.cuarto.modelo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -17,6 +18,7 @@ public class IncidenciaAl {
 
     @ManyToOne
             @JoinColumn(name="id_alumno")
+    @JsonIgnoreProperties("incidenciaAl")
     private Alumno serviciosEscolaresAl;
 
 
